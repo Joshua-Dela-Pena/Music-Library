@@ -3,9 +3,11 @@ import axios from 'axios';
 import DisplayMusic from "./DisplayMusic/DisplayMusic";
 import NavBar from "./NavBar/NavBar";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import SearchResults from "./SearchResults/SearchResults";
 
 function App() {
-  
+
+    const [song, setSong] = useState({})
     const [songs, setSongs] = useState([]);
     const [search, setSearch] = useState([]);
 
@@ -14,26 +16,38 @@ function App() {
     }, [])
 
     async function getAllSongs() {
-      let response = await axios.get('http://www.devcodecampmusiclibrary.com/api/music');
+      let response = await axios.get('http://127.0.0.1:8000/music/');
       setSongs(response.data)
       console.log(response.data)
     }
-    // const searchSong = async(searchTerm) => {
-    //   let response = await axios.get('http://www.devcodecampmusiclibrary.com/api/music' + (searchTerm));
-    //   setSearch(response.data)
-    // }
-    function searchSong(searchTerm) {
-      if (searchTerm.includes(songs.title)) {
-        setSearch(songs)
-        console.log(songs)
-      }
+    
+    async function deleteSong(id) {
+      await axios.delete("http://127.0.0.1:8000/music/", id)
+    }
+
+    async function editSong(id) {
+      await axios.put("http://127.0.0.1:8000/music/", id)
+    }
+    const searchSong = (searchTerm) => {
+      let filteredSongs = songs.filter((foundSong) => {
+        if (foundSong.title.includes(searchTerm)) {
+          return true
+        }
+        else 
+          return false
+        
+      })
+      setSong(filteredSongs)
+      console.log('song', song)
     }
     return (
       <div>
         <Router>
           <NavBar searchSong={searchSong}/>
-          <Routes><Route path="/" element={<DisplayMusic music={songs}/>}/></Routes>
-          
+          <Routes>
+            <Route path="/" element={<DisplayMusic music={songs} delete={deleteSong} />}/>
+            <Route path="/SearchResults" element={<SearchResults songFound={song} />}/>
+          </Routes>
         </Router>
       </div>
     )
