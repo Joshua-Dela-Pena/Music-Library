@@ -19,7 +19,10 @@ const NavBar = (props) => {
     
     return ( 
         <div className='homeButton'>
-            <Link to="/"> Home </Link>
+            <div>
+                <Link to="/"> Home </Link>
+                <Link to="/CreateSong"> Add Song </Link>
+            </div>
             <form onSubmit={handleSubmit} className='form-grid'>
                 <div className='form-group'>
                     <input type="searchTerm" value={searchTerm} name="searchTerm" className="form-control" onChange={handleChange} />
