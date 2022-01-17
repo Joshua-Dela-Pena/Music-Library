@@ -23,7 +23,7 @@ const DisplayMusic = (props) => {
                         <td>{song.genre}</td>
                         <td>{song.artist}</td>
                         <td>{song.id}</td>
-                        <td>{song.releaseDate}</td>
+                        <td>{song.release_date}</td>
                         <td>{song.title}</td>
                         <button>Edit</button>
                         <button onClick={() => props.delete(song.id)}>Delete</button>

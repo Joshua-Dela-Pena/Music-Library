@@ -22,7 +22,8 @@ function App() {
     }
     
     async function deleteSong(id) {
-      await axios.delete("http://127.0.0.1:8000/music/", id)
+      await axios.delete(`http://127.0.0.1:8000/music/${id}`)
+      getAllSongs()
     }
 
     async function editSong(id) {
@@ -37,7 +38,7 @@ function App() {
           return false
         
       })
-      setSong(filteredSongs)
+      setSongs(filteredSongs)
       console.log('song', song)
     }
     return (
@@ -47,6 +48,7 @@ function App() {
           <Routes>
             <Route path="/" element={<DisplayMusic music={songs} delete={deleteSong} />}/>
             <Route path="/SearchResults" element={<SearchResults songFound={song} />}/>
+            <Route path="/EditSong" element={<editSong song={song} />}/>
           </Routes>
         </Router>
       </div>
