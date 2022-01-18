@@ -1,5 +1,7 @@
 import React from 'react';
 import "./DisplayMusic.css"
+import { Link } from 'react-router-dom';
+
 
 const DisplayMusic = (props) => {
     return ( 
@@ -25,7 +27,7 @@ const DisplayMusic = (props) => {
                         <td>{song.id}</td>
                         <td>{song.release_date}</td>
                         <td>{song.title}</td>
-                        <button>Edit</button>
+                        <Link to="/EditSong"> Edit </Link>
                         <button onClick={() => props.delete(song.id)}>Delete</button>
                     </tr>
                     )

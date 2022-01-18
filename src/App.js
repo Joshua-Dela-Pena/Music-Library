@@ -5,6 +5,7 @@ import NavBar from "./NavBar/NavBar";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import SearchResults from "./SearchResults/SearchResults";
 import CreateSong from "./CreateSong/CreateSong";
+import EditSong from "./EditSong/EditSong";
 
 function App() {
 
@@ -32,14 +33,7 @@ function App() {
     }
     
     async function PostSong(id) {
-      let newSong = {
-        title: id.title,
-        artist: id.artist,
-        album: id.album,
-        genre: id.genre,
-        release_date: id.release_date
-      }
-      await axios.put("http://127.0.0.1:8000/music/", newSong)
+      await axios.put("http://127.0.0.1:8000/music/", id)
     }
 
     const searchSong = (searchTerm) => {
@@ -61,7 +55,7 @@ function App() {
           <Routes>
             <Route path="/" element={<DisplayMusic music={songs} delete={deleteSong} />}/>
             <Route path="/SearchResults" element={<SearchResults songFound={song} />}/>
-            <Route path="/EditSong" element={<editSong song={song} />}/>
+            <Route path="/EditSong" element={<EditSong editSong={editSong} />}/>
             <Route path="/CreateSong" element={<CreateSong addSong={PostSong} />}/>
           </Routes>
         </Router>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 const CreateSong = (props) => {
 
     const[title, setTitle] = useState('')
@@ -11,7 +10,7 @@ const CreateSong = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.addSong(title, genre, album, release_date, artist)
+        props.addSong({title, genre, album, release_date, artist})
     }
 
     const handleChange1 = (event) => {
@@ -38,13 +37,12 @@ const CreateSong = (props) => {
     return ( 
         <div>
             <form onSubmit={handleSubmit}>
-                <label>Add Song</label>
-                    <input onChange={handleChange1} type="title" name="title" value={title}/>
-                    <input onChange={handleChange2} type="genre" name="genre" value={genre}/>
-                    <input onChange={handleChange3} type="album" name="album" value={album}/>
-                    <input onChange={handleChange4} type="artist" name="artist" value={artist}/>
-                    <input onChange={handleChange5} type="release_date" name="release_date" value={release_date}/>
-                    
+                    <div><label> Title </label><input onChange={handleChange1} type="title" name="title" value={title}/></div>
+                    <div><label> Genre </label><input onChange={handleChange2} type="genre" name="genre" value={genre}/></div>
+                    <div><label> Album </label><input onChange={handleChange3} type="album" name="album" value={album}/></div>
+                    <div><label> Artist </label><input onChange={handleChange4} type="artist" name="artist" value={artist}/></div>
+                    <div><label> Release Date </label><input onChange={handleChange5} type="release_date" name="release_date" value={release_date}/></div>
+                    <button type="submit"> Add Song </button>
             </form>
         </div>
      );
